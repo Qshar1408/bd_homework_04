@@ -9,6 +9,19 @@
 - город нахождения магазина;
 - количество пользователей, закреплённых в этом магазине.
 
+```bash
+SELECT CONCAT(s.first_name , " ", s.last_name) AS 'Сотрудник магазина', cm.city AS 'Город нахождения магазина', COUNT(c.customer_id) AS 'Количество покупателей'
+FROM staff AS s
+JOIN address AS a ON a.address_id = s.address_id
+JOIN city AS cm ON cm.city_id = a.city_id
+JOIN store AS st ON st.store_id = s.store_id
+JOIN customer AS c ON c.store_id = s.store_id
+GROUP BY staff_id
+HAVING COUNT(c.customer_id) > 300;
+```
+
+ ![bd_004](https://github.com/Qshar1408/bd_homework_04/blob/main/img/bd_04_001.png)
+
 ### Задание 2
 
 Получите количество фильмов, продолжительность которых больше средней продолжительности всех фильмов.
